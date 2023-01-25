@@ -100,7 +100,7 @@ func main() {
 							userFill[len(userFill)-1] = 0
 							userFill = userFill[:len(userFill)-1]
 							userFillSuccess = true
-							if p.p == "0-2" || p.p == "2-4" || p.p == "4-6" {
+							if p.p == "0-2" || p.p == "2-4" || p.p == "4-6" || p.p == "22-24" {
 								if pCounter > 2 {
 									break
 								} else {
@@ -117,7 +117,7 @@ func main() {
 					}
 				}
 				if userFillSuccess == true {
-					if p.p == "0-2" || p.p == "2-4" || p.p == "4-6" {
+					if p.p == "0-2" || p.p == "2-4" || p.p == "4-6" || p.p == "22-24" {
 						if pCounter > 2 {
 							break
 						} else {
@@ -137,7 +137,7 @@ func main() {
 				}
 				if assert(i, j-1, p) {
 					pCounter++
-					if p.p == "0-2" || p.p == "2-4" || p.p == "4-6" {
+					if p.p == "0-2" || p.p == "2-4" || p.p == "4-6" || p.p == "22-24" {
 						if pCounter > 2 {
 							break
 						} else {
