@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"golang.org/x/exp/slices"
+	"sort"
 )
 
 const (
@@ -158,17 +159,27 @@ func main() {
 		}
 	}
 
-	for key, value := range planning {
+	keys := make([]int, 0, len(planning))
+	for key, _ := range planning {
+		keys = append(keys, key)
+	}
+	sort.Ints(keys)
+	for key, _ := range keys {
 		fmt.Println("day : ", key)
-		for k, v := range value {
+		for k, v := range planning[key] {
 			fmt.Print("time : ", k)
 			fmt.Println(" codes : ", v)
 		}
 	}
 
-	for key, value := range planHistory {
-		fmt.Println(key)
-		fmt.Println(value)
+	keysH := make([]int, 0, len(planning))
+	for key, _ := range planHistory {
+		keysH = append(keysH, key)
+	}
+	sort.Ints(keysH)
+	for _, key := range keysH {
+		fmt.Println("Code History : ", key)
+		fmt.Println(planHistory[key])
 	}
 
 }
