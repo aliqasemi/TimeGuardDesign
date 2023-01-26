@@ -24,7 +24,7 @@ var periods = []period{period{"0-2"}, period{"2-4"}, period{"4-6"},
 	period{"14-16"}, period{"16-18"}, period{"18-20"}, period{"20-22"}, period{"22-24"},
 }
 
-var exceptionCode = []int{1, 3, 5, 6, 7, 15, 25, 34, 37, 39, 43, 44, 48, 52, 53, 54, 63, 73}
+var exceptionCode = []int{1, 3, 5, 6, 7, 9, 15, 25, 34, 37, 39, 43, 44, 48, 52, 53, 54, 63, 73}
 
 func init() {
 	for i := 1; i <= NumberOfUser; i++ {
