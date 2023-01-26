@@ -24,7 +24,7 @@ var periods = []period{period{"0-2"}, period{"2-4"}, period{"4-6"},
 	period{"14-16"}, period{"16-18"}, period{"18-20"}, period{"20-22"}, period{"22-24"},
 }
 
-var exceptionCode = []int{1, 3, 5, 6, 7, 15, 25, 34, 37, 39, 43, 44, 48, 52, 53, 54, 63}
+var exceptionCode = []int{1, 3, 5, 6, 7, 9, 15, 25, 34, 37, 39, 43, 44, 48, 52, 53, 54, 63, 73}
 
 func init() {
 	for i := 1; i <= NumberOfUser; i++ {
@@ -61,10 +61,38 @@ func findMin(a map[period]int) (minKeys []period, min int) {
 	return minKeys, min
 }
 
+func findMinimal(a map[period]int) (minKeys []period, min int) {
+	minKeys = make([]period, 0, len(a))
+	min = a[periods[0]]
+
+	for _, value := range a {
+		if value < min-1 {
+			min = value + 1
+		}
+	}
+
+	for key, value := range a {
+		if value == min {
+			minKeys = append(minKeys, key)
+		}
+	}
+
+	if len(minKeys) == 0 {
+		minKeys = periods
+	}
+
+	return minKeys, min
+}
+
 func assert(i, j int, p period) bool {
 	if !slices.Contains(exceptionCode, j) {
 		minKeys, _ := findMin(planHistory[j])
+		minimalKeys, _ := findMinimal(planHistory[j])
 		if slices.Contains(minKeys, p) && checkHistoryOfExistSentryTodayAndYesterday(i, j) {
+			planning[i][p] = append(planning[i][p], j)
+			planHistory[j][p]++
+			return true
+		} else if slices.Contains(minimalKeys, p) && checkHistoryOfExistSentryTodayAndYesterday(i, j) {
 			planning[i][p] = append(planning[i][p], j)
 			planHistory[j][p]++
 			return true
